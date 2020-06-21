@@ -70,7 +70,7 @@ def read_exr_header(exrpath, maxreadsize=2000):
     if not os.path.exists(exrpath):
         raise OSError('given EXR path does not exist ({})'.format(exrpath))
 
-    exr_file = open(exrpath)
+    exr_file = open(exrpath, "rb")
 
     metadata = {}
 
