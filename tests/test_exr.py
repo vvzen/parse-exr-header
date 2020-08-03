@@ -3,6 +3,18 @@ import pytest
 import sys
 import os
 
+"""
+The tests work with Python 2 and Python 3.
+Please remember that Python 2 works with byte strings as default
+and with the change of Python 3 unicode strings are used.
+
+Python 2 default string
+foo = b'bar'
+
+Python 3 default string:
+foo = u'bar'
+"""
+
 # Append the required module
 # Not the best way but it works in Python 2.7
 sys.path.append(
@@ -45,3 +57,51 @@ class TestEXRParsing:
 
         metadata = parse_metadata.read_exr_header(self.rec709_test_image_path)
         assert metadata['owner'] == 'Copyright 2006 Industrial Light & Magic'
+
+    def test_exr_meta_all(self):
+        expected = {
+            'compression': 'PIZ_COMPRESSION',
+            'pixelAspectRatio': 1.0,
+            'displayWindow': {
+                'xMin': 0,
+                'yMin': 0,
+                'yMax': 405,
+                'xMax': 609
+            },
+            'channels': {
+                'R': {
+                    'reserved': [0, 0, 0],
+                    'pLinear': (0, ),
+                    'pixel_type': (1, ),
+                    'xSampling': (1, ),
+                    'ySampling': (1, )
+                },
+                'B': {
+                    'reserved': [0, 0, 0],
+                    'pLinear': (0, ),
+                    'pixel_type': (1, ),
+                    'xSampling': (1, ),
+                    'ySampling': (1, )
+                },
+                'G': {
+                    'reserved': [0, 0, 0],
+                    'pLinear': (0, ),
+                    'pixel_type': (1, ),
+                    'xSampling': (1, ),
+                    'ySampling': (1, )
+                }
+            },
+            'dataWindow': {
+                'xMin': 0,
+                'yMin': 0,
+                'yMax': 405,
+                'xMax': 609
+            },
+            'screenWindowCenter': [0.0, 0.0],
+            'owner': 'Copyright 2006 Industrial Light & Magic',
+            'screenWindowWidth': 1.0,
+            'lineOrder': 'INCREASING_Y'
+        }
+
+        result = parse_metadata.read_exr_header(self.rec709_test_image_path)
+        assert result == expected
