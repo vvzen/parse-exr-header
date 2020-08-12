@@ -12,9 +12,10 @@ That's why I've written this very small python module (currently ~360 LOCs) that
 
 # Dependencies
 Optional, for tests:
-pytest==4.2.0
+`pytest==4.2.0`
+
 Optional, for formatting:
-yapf==0.30.0
+`yapf==0.30.0`
 
 # Support
 This repo now supports both Python2.7 and also Python3.8.
