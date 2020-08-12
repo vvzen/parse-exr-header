@@ -55,7 +55,10 @@ def read_until_null(filebuffer, maxbytes=1024):
 def convert_to_unicode_string(data):
     """Recursively convert dictionary keys and values to unicode strings"""
     if isinstance(data, dict):
-        return {convert_to_unicode_string(k): convert_to_unicode_string(v) for k, v in data.items()}
+        return {
+            convert_to_unicode_string(k): convert_to_unicode_string(v)
+            for k, v in data.items()
+        }
     elif isinstance(data, list):
         return [convert_to_unicode_string(v) for v in data]
     elif isinstance(data, bytes):
