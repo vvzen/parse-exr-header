@@ -13,6 +13,12 @@ That's why I've written this very small python module (currently ~360 LOCs) that
 # Dependencies
 Optional, for tests:
 pytest==4.2.0
+Optional, for formatting:
+yapf==0.30.0
+
+# Support
+This repo now supports both Python2.7 and also Python3.8.
+Thanks to [jonaskluger](https://github.com/jonaskluger) for providing python3 support.
 
 # Install
 This script is not packaged in any fancy way. Just grab the `parse_metadata.py` and put it wherever you want.
@@ -28,3 +34,12 @@ You will need also the git submodule that contains all the exr images, so you ne
 
 # PR & Bugs
 Fill free to submit Pull Requests if you notice anything wrong. I'm more than happy to merge them and adapt them to my coding style (which is just PEP8 stuff with some additional things like lowercase functions args in order to distinguish arguments from variables inside the scope of a function - very useful in my opinion and blog post coming soon).
+
+### Formatting
+I use [yapf](https://github.com/google/yapf) to end all style wars and let it do all of the formatting for me. After you made a PR, you can run it like this:
+```
+yapf --in-place src/parse_metadata.py
+```
+
+This of course requires you to have `yapf` installed locally or somewhere in your `$PATH`.
+Yapf will simply read the `.style.yapf` file that is hosted in this repo and format the file according to these rules.
