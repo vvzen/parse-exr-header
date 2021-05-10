@@ -3,7 +3,7 @@ Pure Python (no additional dependencies) helper functions to read metadata from 
 
 # Reasons
 In the VFX world we've got tons of great open source initiatives, like ILM's OpenEXR and Sony's OpenImageIO.
-Both are great C++ projects and also provide bindings for Python, so I definitely recommend using them.
+Both are great C++ projects (and OIIO also provides bindings for Python), so I definitely recommend using them.
 
 BUT maybe your package manager doesn't have a specific version and compiling them from scratch can be a long process that could get you stuck in many, many different & non well documented cmake issues.
 
