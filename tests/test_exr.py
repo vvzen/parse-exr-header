@@ -71,24 +71,24 @@ class TestEXRParsing:
             'channels': {
                 'R': {
                     'reserved': [0, 0, 0],
-                    'pLinear': (0, ),
-                    'pixel_type': (1, ),
-                    'xSampling': (1, ),
-                    'ySampling': (1, )
+                    'pLinear': 0,
+                    'pixel_type': 1,
+                    'xSampling': 1,
+                    'ySampling': 1
                 },
                 'B': {
                     'reserved': [0, 0, 0],
-                    'pLinear': (0, ),
-                    'pixel_type': (1, ),
-                    'xSampling': (1, ),
-                    'ySampling': (1, )
+                    'pLinear': 0,
+                    'pixel_type': 1,
+                    'xSampling': 1,
+                    'ySampling': 1
                 },
                 'G': {
                     'reserved': [0, 0, 0],
-                    'pLinear': (0, ),
-                    'pixel_type': (1, ),
-                    'xSampling': (1, ),
-                    'ySampling': (1, )
+                    'pLinear': 0,
+                    'pixel_type': 1,
+                    'xSampling': 1,
+                    'ySampling': 1
                 }
             },
             'dataWindow': {
