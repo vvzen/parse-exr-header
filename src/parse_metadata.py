@@ -101,25 +101,44 @@ def read_exr_header(exrpath, maxreadsize=2000):
                  ord(openxr_version_number[0]),
                  ord(version_field_attrs[0]), ord(version_field_attrs[1]),
                  ord(version_field_attrs[2]))
+        is_multipart = bool(ord(version_field_attrs[0]) & 0b10000)
+        if is_multipart:
+            log.info('multi-part bit is set')
         log.info("METADATA:")
         i = 0
+        part_count = 0
+        next_header = False
 
         while i < maxreadsize:
 
             # We'll always have attribute name, attribute type separated by a
             # null byte. Then attribute size and attribute value follow
             attribute_name, attribute_name_length = read_until_null(exr_file)
-            attribute_type, _ = read_until_null(exr_file)
-            attribute_size = int(struct.unpack('i', exr_file.read(4))[0])
 
             # If we're reading only byte it means it's the null byte
-            # and we've reached the end of the header
+            # and we've reached the end of the header. In multi-part files
+            # the headers are done after two null bytes in a row.
             if attribute_name_length == 1:
-                log.debug('reached the end of the header!')
-                break
+                if is_multipart is False or next_header is True:
+                    log.debug('reached the end of the header!')
+                    break
+                else:
+                    part_count += 1
+                    next_header = True
+                    log.debug('end of part {}'.format(part_count))
+                    continue
+            else:
+                next_header = False
 
-            if not attribute_name in metadata:
+            attribute_type, _ = read_until_null(exr_file)
+            attribute_size = int(struct.unpack('i', exr_file.read(4))[0])
+            if attribute_name not in metadata:
                 metadata[attribute_name] = {}
+            elif is_multipart and attribute_name != "channels":
+                # in multi-part files, skip over all attributes that already exist
+                # except for the channel list
+                exr_file.read(attribute_size)
+                continue
 
             # How many bytes of the attribute value we've read
             byte_count = 0
@@ -182,7 +201,7 @@ def read_exr_header(exrpath, maxreadsize=2000):
                         'ySampling': y_sampling
                     }
 
-                    metadata[attribute_name] = channel_data
+                metadata[attribute_name].update(channel_data)
 
             elif attribute_type == b'chromaticities':
                 chromaticities = struct.unpack('f' * 8, exr_file.read(4 * 8))
