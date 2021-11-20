@@ -170,15 +170,15 @@ def read_exr_header(exrpath, maxreadsize=2000):
                     if channel_name_length == 1:
                         break
 
-                    pixel_type = struct.unpack('i', exr_file.read(4 * 1))
+                    pixel_type = struct.unpack('i', exr_file.read(4 * 1))[0]
                     byte_count += 4
-                    p_linear = struct.unpack('B', exr_file.read(1 * 1))
+                    p_linear = struct.unpack('B', exr_file.read(1 * 1))[0]
                     byte_count += 1
                     reserved = struct.unpack('ccc', exr_file.read(1 * 3))
                     byte_count += 3
-                    x_sampling = struct.unpack('i', exr_file.read(4 * 1))
+                    x_sampling = struct.unpack('i', exr_file.read(4 * 1))[0]
                     byte_count += 4
-                    y_sampling = struct.unpack('i', exr_file.read(4 * 1))
+                    y_sampling = struct.unpack('i', exr_file.read(4 * 1))[0]
                     byte_count += 4
 
                     channel_data[channel_name] = {
@@ -266,11 +266,15 @@ def read_exr_header(exrpath, maxreadsize=2000):
 
             elif attribute_type == b'preview':
 
-                width = struct.unpack('I', exr_file.read(4 * 1))
-                height = struct.unpack('I', exr_file.read(4 * 1))
+                width = struct.unpack('I', exr_file.read(4 * 1))[0]
+                height = struct.unpack('I', exr_file.read(4 * 1))[0]
+
+                # We could add a sanity check here, because
+                # preview_size should equal attribute_size-8
+                preview_size = 1 * 4 * width * height
 
                 pixel_data = struct.unpack(
-                    'B', exr_file.read(1 * 4 * width * height))
+                    '%dB' % preview_size, exr_file.read(preview_size))
 
                 metadata[attribute_name] = {
                     'width': width,
@@ -311,9 +315,9 @@ def read_exr_header(exrpath, maxreadsize=2000):
                     metadata[attribute_name].append(b''.join(string_content))
 
             elif attribute_type == b'tiledesc':
-                x_size = struct.unpack('I', exr_file.read(4 * 1))
-                y_size = struct.unpack('I', exr_file.read(4 * 1))
-                mode = struct.unpack('B', exr_file.read(1 * 1))
+                x_size = struct.unpack('I', exr_file.read(4 * 1))[0]
+                y_size = struct.unpack('I', exr_file.read(4 * 1))[0]
+                mode = struct.unpack('B', exr_file.read(1 * 1))[0]
 
                 metadata[attribute_name] = {
                     'xSize': x_size,
@@ -322,8 +326,8 @@ def read_exr_header(exrpath, maxreadsize=2000):
                 }
 
             elif attribute_type == b'timecode':
-                time_and_flags = struct.unpack('I', exr_file.read(4 * 1))
-                user_data = struct.unpack('I', exr_file.read(4 * 1))
+                time_and_flags = struct.unpack('I', exr_file.read(4 * 1))[0]
+                user_data = struct.unpack('I', exr_file.read(4 * 1))[0]
 
                 metadata[attribute_name] = {
                     'timeAndFlags': time_and_flags,
