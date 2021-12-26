@@ -1,7 +1,7 @@
 name: Run tests on Pull Request
 on: [push]
 jobs:
-  run-tests:
+  run-tests-on-py27:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -13,6 +13,22 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "2.7"
+      - name: Install dependencies
+        run: python -m pip install -r dev-requirements.txt
+      - name: Run Tests
+        run: pytest tests
+  run-tests-on-py37:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repo code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
       - name: Install dependencies
         run: python -m pip install -r dev-requirements.txt
       - name: Run Tests
