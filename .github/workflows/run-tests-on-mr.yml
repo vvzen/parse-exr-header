@@ -12,6 +12,6 @@ jobs:
         with:
           python-version: "2.7"
       - name: Install dependencies
-        run: python- m pip install -r dev-requirements.txt
+        run: python -m pip install -r dev-requirements.txt
       - name: Run Tests
         run: pytest tests
