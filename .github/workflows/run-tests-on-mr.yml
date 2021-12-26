@@ -1,5 +1,5 @@
 name: Run tests on Pull Request
-on: [push]
+on: [push, pull_request]
 jobs:
   run-tests-on-py27:
     runs-on: ubuntu-latest
