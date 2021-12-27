@@ -28,11 +28,12 @@ Support for multipart files is on its way but it will need a bit of work since t
 
 # Install
 This script is not packaged in any fancy way. Just grab the `parse_metadata.py` and put it wherever you want.
-Maybe in the future I'll add a small cli and package everything properly.
+
+_Update (2021/12/27)_: Now there is also a tiny cli (`bin/vv-exr-metadata`) that you can use, if you want, to list the metadata of a file from a shell session. It supports the wildcard notation (*) if you want to look at multiple files at once.
 
 # Tests
 I'm not a TDD guy (yet) - so there are very few tests. I'm planning to write more of them as soon as I can breathe a little.
-You can run tests by typing: `pytest` from the root dir of this repo.
+You can run tests by typing: `pytest tests` from the root dir of this repo.
 
 You will need also the git submodule that contains all the exr images, so you need to clone the repo like this:
 
@@ -40,6 +41,8 @@ You will need also the git submodule that contains all the exr images, so you ne
 
 # PR & Bugs
 Fill free to submit Pull Requests if you notice anything wrong. I'm more than happy to merge them and adapt them to my coding style (which is just PEP8 stuff with some additional things like lowercase functions args in order to distinguish arguments from variables inside the scope of a function - very useful in my opinion and blog post coming soon).
+
+Note: Whenever you submit a PR, the CI should automatically run the tests for you using Github Actions.
 
 ### Formatting
 I use [yapf](https://github.com/google/yapf) to end all style wars and let it do all of the formatting for me. After you made a PR, you can run it like this:
