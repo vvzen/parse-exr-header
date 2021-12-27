@@ -1,12 +1,10 @@
 #-*- coding: utf-8 -*-
 import os
 import sys
-import subprocess
 import struct
-
 import logging
 
-logger = logging.getLogger('vvzen.parse_metadata')
+log = logging.getLogger('vvzen.parse_metadata')
 
 
 class EXR_ATTRIBUTES:
@@ -73,7 +71,9 @@ def read_exr_header(exrpath, maxreadsize=2000):
 
     Args:
         exrpath (str): absolute path to the exr file
-        maxreadsize (int, optional): Avoids infinite loops in case a final null byte is never encountered or the exr is formatted in a bad way. Defaults to 2000.
+        maxreadsize (int, optional): Avoids infinite loops in case a final null
+            byte is never encountered or the exr is formatted in a bad way.
+            Defaults to 2000.
 
     Raises:
         OSError: if the exr does not exist
@@ -91,25 +91,23 @@ def read_exr_header(exrpath, maxreadsize=2000):
     metadata = {}
 
     try:
-
         magic_number = struct.unpack('i', exr_file.read(4))
-        logger.info('magic_number: {}'.format(magic_number[0]))
-
         openxr_version_number = struct.unpack('c', exr_file.read(1))
-        logger.info('OpenEXR Version Number: {}'.format(
-            ord(openxr_version_number[0])))
-
         version_field_attrs = struct.unpack('ccc', exr_file.read(3))
-        logger.info('version_field_attrs : {} {} {}'.format(
-            ord(version_field_attrs[0]), ord(version_field_attrs[1]),
-            ord(version_field_attrs[2])))
 
+        log.info("File name: '%s'\nMagic number: %i\n"
+                 "OpenEXR Version Number: %i\nVersion field: %s %s %s",
+                 os.path.basename(exrpath), magic_number[0],
+                 ord(openxr_version_number[0]),
+                 ord(version_field_attrs[0]), ord(version_field_attrs[1]),
+                 ord(version_field_attrs[2]))
+        log.info("METADATA:")
         i = 0
 
         while i < maxreadsize:
 
-            # We'll always have attribute name, attribute type separated by a null byte
-            # Then attribute size and attribute value follow
+            # We'll always have attribute name, attribute type separated by a
+            # null byte. Then attribute size and attribute value follow
             attribute_name, attribute_name_length = read_until_null(exr_file)
             attribute_type, _ = read_until_null(exr_file)
             attribute_size = int(struct.unpack('i', exr_file.read(4))[0])
@@ -117,21 +115,16 @@ def read_exr_header(exrpath, maxreadsize=2000):
             # If we're reading only byte it means it's the null byte
             # and we've reached the end of the header
             if attribute_name_length == 1:
-                logger.info('reached the end of the header!')
+                log.debug('reached the end of the header!')
                 break
 
             if not attribute_name in metadata:
                 metadata[attribute_name] = {}
 
-            # print('attribute name: {}, length: {}, type: {}, size: {}'.format(
-            #     attribute_name, attribute_name_length, attribute_type,
-            #     attribute_size))
-
             # How many bytes of the attribute value we've read
             byte_count = 0
 
             # Parse the attribute value
-
             if attribute_type == b'box2i':
                 box_values = struct.unpack('i' * 4, exr_file.read(4 * 4))
 
@@ -273,8 +266,8 @@ def read_exr_header(exrpath, maxreadsize=2000):
                 # preview_size should equal attribute_size-8
                 preview_size = 1 * 4 * width * height
 
-                pixel_data = struct.unpack(
-                    '%dB' % preview_size, exr_file.read(preview_size))
+                pixel_data = struct.unpack('%dB' % preview_size,
+                                           exr_file.read(preview_size))
 
                 metadata[attribute_name] = {
                     'width': width,
@@ -365,8 +358,7 @@ def read_exr_header(exrpath, maxreadsize=2000):
                 metadata[attribute_name].append(vector_3d_value[2])
 
             else:
-                logger.error(
-                    'unknown attribute type: {}!!'.format(attribute_type))
+                log.error('unknown attribute type: %s!!', attribute_type)
 
                 metadata[attribute_name] = 'unknown attribute type!'
 
