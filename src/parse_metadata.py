@@ -91,13 +91,12 @@ def read_exr_header(exrpath, maxreadsize=2000):
     metadata = {}
 
     try:
-
         magic_number = struct.unpack('i', exr_file.read(4))
         openxr_version_number = struct.unpack('c', exr_file.read(1))
         version_field_attrs = struct.unpack('ccc', exr_file.read(3))
 
-        log.info("READING: '%s'.\n\tMagic number: %i.\n\t"
-                 "OpenEXR Version Number: %i.\n\tVersion field: %s %s %s",
+        log.info("File name: '%s'\nMagic number: %i\n"
+                 "OpenEXR Version Number: %i\nVersion field: %s %s %s",
                  os.path.basename(exrpath), magic_number[0],
                  ord(openxr_version_number[0]),
                  ord(version_field_attrs[0]), ord(version_field_attrs[1]),

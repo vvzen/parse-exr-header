@@ -26,14 +26,17 @@ def main():
                         help="Path to source exr image")
 
     args = parser.parse_args()
+    paths = args.source_paths
 
-    for path in args.source_paths:
+    for path in paths:
         if not os.path.exists(path):
             log.error("Source Path was not found on disk: %s", path)
             continue
 
         metadata = parse_metadata.read_exr_header(path)
         print(pprint.pformat(metadata))
+        if len(paths) > 1:
+            print("-"*80)
 
 if __name__ == '__main__':
     main()
