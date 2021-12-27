@@ -18,8 +18,13 @@ Optional, for formatting:
 `yapf==0.30.0`
 
 # Support
+
+## Python version
 This repo now supports both Python2.7 and also Python3.8.
 Thanks to [jonaskluger](https://github.com/jonaskluger) for providing python3 support.
+
+## Multipart files
+Support for multipart files is on its way but it will need a bit of work since the original design of this hobby project was a bit naive. A PR is currently pending.
 
 # Install
 This script is not packaged in any fancy way. Just grab the `parse_metadata.py` and put it wherever you want.
@@ -39,7 +44,7 @@ Fill free to submit Pull Requests if you notice anything wrong. I'm more than ha
 ### Formatting
 I use [yapf](https://github.com/google/yapf) to end all style wars and let it do all of the formatting for me. After you made a PR, you can run it like this:
 ```
-yapf --in-place src/parse_metadata.py
+yapf --in-place src/*.py
 ```
 
 This of course requires you to have `yapf` installed locally or somewhere in your `$PATH`.
