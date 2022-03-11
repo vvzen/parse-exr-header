@@ -1,4 +1,7 @@
 # parse-exr-header
+[![license](https://img.shields.io/github/license/vvzen/parse-exr-header)](https://github.com/vvzen/parse-exr-header/blob/master/LICENSE)
+
+
 Pure Python (no additional dependencies) helper functions to read metadata from the header of EXR files.
 
 # Reasons
