@@ -104,6 +104,116 @@ def test_exr_meta_owner():
         'owner': 'Copyright 2006 Industrial Light & Magic',
         'screenWindowWidth': 1.0,
         'lineOrder': 'INCREASING_Y'
+    }),
+    # Beachball (multipart)
+    pytest.param(os.path.join(EXR_IMAGES_DIR_PATH, 'Beachball', 'multipart.0001.exr'), {
+        'compression': 'ZIPS_COMPRESSION',
+        'pixelAspectRatio': 1.0,
+        'displayWindow': {
+            'xMax': 2047,
+            'xMin': 0,
+            'yMax': 1555,
+            'yMin': 0
+        },
+        'dataWindow': {
+            'xMax': 1530,
+            'xMin': 654,
+            'yMax': 1120,
+            'yMin': 245
+        },
+        'channels': {
+            'A': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'B': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'G': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'R': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'Z': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'disparityL.x': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'disparityL.y': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'disparityR.x': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'disparityR.y': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'forward.u': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'forward.v': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            },
+            'whitebarmask.mask': {
+                'pLinear': 0,
+                'pixel_type': 1,
+                'reserved': [0, 0, 0],
+                'xSampling': 1,
+                'ySampling': 1
+            }
+        },
+        'screenWindowCenter': [0.0, 0.0],
+        'screenWindowWidth': 1.0,
+        'lineOrder': 'INCREASING_Y',
+        'chunkCount': 876,
+        'name': 'rgba_right',
+        'type': 'scanlineimage',
+        'view': 'right',
     })
 ])
 def test_exr_meta_all(input_path, expected_metadata):
