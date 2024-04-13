@@ -11,7 +11,7 @@ Both are great C++ projects (and OIIO also provides bindings for Python), so I d
 BUT maybe your package manager doesn't have a specific version and compiling them from scratch can be a long process that could get you stuck in many, many different & non well documented cmake issues.
 
 If you only need to do something as trivial as reading the metadata of an EXR file and you don't need to do any image manipulation stuff, it's just not worth the hassle.
-That's why I've written this very small python module (currently ~360 LOCs) that simply reads the header of an exr file, according to the official EXR documentation available here: https://www.openexr.com/documentation/openexrfilelayout.pdf
+That's why I've written this very small python module (currently ~360 LOCs) that simply reads the header of an exr file, according to the official EXR documentation available here: https://www.openexr.com/documentation/openexrfilelayout.pdf (now moved to https://openexr.com/en/latest/OpenEXRFileLayout.html)
 
 # Dependencies
 Optional, for tests:
