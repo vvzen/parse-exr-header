@@ -1,4 +1,0 @@
-pytest==9.0.3
-# attrs is required by pytest, see https://stackoverflow.com/a/58189684
-attrs==19.1.0
-yapf==0.30.0
