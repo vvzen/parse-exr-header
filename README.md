@@ -15,10 +15,10 @@ That's why I've written this very small python module (currently ~360 LOCs) that
 
 # Dependencies
 Optional, for tests:
-`pytest==4.2.0`
+`pytest==9.0.3`
 
 Optional, for formatting:
-`yapf==0.30.0`
+`yapf==0.43.0`
 
 # Support
 
