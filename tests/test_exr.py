@@ -4,7 +4,7 @@ import os
 import pytest
 
 """
-The tests are ment to work with Python 3.10+.
+The tests are meant to work with Python 3.10+.
 """
 
 import parse_exr_header.lib
