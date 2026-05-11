@@ -1,0 +1,21 @@
+[project]
+name = "parse-exr-header"
+version = "0.1.0"
+description = "Pure python module to read metadata files from the header of OpenEXR files."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+vv-exr-metadata = "parse_exr_header.cli:main"
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+test = [
+    "attrs>=26.1.0",
+    "pytest==9.0.3",
+    "yapf>=0.43.0",
+]
