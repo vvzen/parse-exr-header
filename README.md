@@ -23,16 +23,19 @@ Optional, for formatting:
 # Support
 
 ## Python version
-This repo now supports both Python2.7 and also Python3.8.
-Thanks to [jonaskluger](https://github.com/jonaskluger) for providing python3 support.
+This project is compatible with Python3.7+, although officially it requires 3.10 (because it's 2026 and 3.7 should really be a thing of the past given its EOL date). The CI runs tests against Python 3.10 and 3.14.
+Thanks to [jonaskluger](https://github.com/jonaskluger) for providing original support for Python 3.
 
 ## Multipart files
 Support for multipart files is on its way but it will need a bit of work since the original design of this hobby project was a bit naive. A PR is currently pending.
 
 # Install
-This script is not packaged in any fancy way. Just grab the `parse_metadata.py` and put it wherever you want.
+This project uses the `pyproject.toml` (with setuptools as its build backend).
+Once you cloned the repo, you can install it via pip into the venv of your choice: `python3 -m pip install /path/where/you/cloned/this`.
 
-_Update (2021/12/27)_: Now there is also a tiny cli (`bin/vv-exr-metadata`) that you can use, if you want, to list the metadata of a file from a shell session. It supports the wildcard notation (*) if you want to look at multiple files at once.
+But you can also just grab the `parse_metadata.py` and put it wherever you want, since it's a single file library.
+
+_Update (2021/12/27)_: Now there is also a small cli (`vv-exr-metadata`) that you can use, if you want, to list the metadata of a file from a shell session. It supports the wildcard notation (*) if you want to look at multiple files at once.
 
 # Tests
 I'm not a TDD guy (yet) - so there are very few tests. I'm planning to write more of them as soon as I can breathe a little.
