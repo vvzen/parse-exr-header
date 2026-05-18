@@ -58,3 +58,8 @@ yapf --in-place src/*.py
 
 This of course requires you to have `yapf` installed locally or somewhere in your `$PATH`.
 Yapf will simply read the `.style.yapf` file that is hosted in this repo and format the file according to these rules.
+
+
+## Extras
+
+If you're looking for a "easy to install" replacement to `exrheader`, have a look at my other project: [exrheader-rs](https://github.com/vvzen/exrheader-rs) !
